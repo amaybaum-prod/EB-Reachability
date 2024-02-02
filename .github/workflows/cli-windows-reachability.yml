@@ -1,0 +1,47 @@
+name: Mend Reachability CLI Scan (Windows)
+
+on: workflow_dispatch
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest 
+    environment: dev
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: Setup Java Sdk ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Build with Maven
+      shell: pwsh 
+      run: mvn clean install -DskipTests
+
+# The mend dep scan should be called AFTER a package manager build step such as "mvn clean install -DskipTests=true" or "npm install --only=prod"
+    - name: Mend CLI Download
+      env:
+        MEND_EMAIL: ${{secrets.MEND_EMAIL}}
+        MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
+        MEND_URL: https://saas.mend.io
+      run: |
+        echo === Downloading Mend CLI ==
+        curl https://downloads.mend.io/cli/windows_amd64/mend.exe -o C:\mend\cli\mend.exe
+        echo === Mend CLI version: ===
+        .\mend version
+
+    - name: Mend CLI Scan
+      env:
+        MEND_EMAIL: ${{secrets.MEND_EMAIL}}
+        MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
+        MEND_URL: https://saas.mend.io
+      run: |
+        echo === Running Scan ===
+        .\mend dep -u --reachability-on
+      continue-on-error: true
+
+    - name: Mend CLI Logs
+      run: cat ~/.mend/logs/sca/*.log
+      continue-on-error: true
+
