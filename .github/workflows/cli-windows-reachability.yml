@@ -3,7 +3,7 @@ name: Mend Reachability CLI Scan (Windows)
 on: workflow_dispatch
 
 jobs:
-  build-and-deploy:
+  build-and-mend-scan:
     runs-on: windows-latest 
     environment: dev
     steps:
