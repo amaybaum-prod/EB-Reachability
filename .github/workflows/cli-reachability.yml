@@ -1,4 +1,4 @@
-name: Mend CLI Scan
+name: Mend Reachability CLI Scan
 
 on: workflow_dispatch
 
@@ -28,3 +28,5 @@ jobs:
         echo run Mend dependencies scan
         mend version
         mend dep -u --reachability-on
+        echo === Log content ===
+        cat ~/.mend/logs/sca/*.log
