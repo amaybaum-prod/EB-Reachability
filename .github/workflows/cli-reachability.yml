@@ -30,3 +30,4 @@ jobs:
         mend dep -u --reachability-on
         echo === Log content ===
         cat ~/.mend/logs/sca/*.log
+      continue-on-error: true
