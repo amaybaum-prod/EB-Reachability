@@ -1,4 +1,4 @@
-name: Mend Reachability CLI Scan
+name: Mend Reachability CLI Scan (Linux)
 
 on: workflow_dispatch
 
