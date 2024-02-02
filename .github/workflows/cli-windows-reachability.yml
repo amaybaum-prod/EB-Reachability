@@ -5,7 +5,7 @@ on: workflow_dispatch
 jobs:
   build-and-mend-scan:
     runs-on: windows-latest 
-    environment: dev
+
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v3
