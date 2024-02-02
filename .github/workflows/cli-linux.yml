@@ -40,3 +40,4 @@ jobs:
 
     - name: Mend CLI Logs
       run: cat ~/.mend/logs/sca/*.log
+      continue-on-error: true
