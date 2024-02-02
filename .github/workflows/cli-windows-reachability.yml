@@ -10,7 +10,7 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v3
 
-    - name: Setup Java Sdk ${{ env.JAVA_VERSION }}
+    - name: Setup Java Sdk
       uses: actions/setup-java@v1
       with:
         java-version: 11
@@ -26,9 +26,9 @@ jobs:
         MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
         MEND_URL: https://saas.mend.io
       run: |
-        echo === Downloading Mend CLI ==
+        echo '=== Downloading Mend CLI =='
         curl https://downloads.mend.io/cli/windows_amd64/mend.exe -o mend.exe
-        echo === Mend CLI version: ===
+        echo '=== Mend CLI version: ==='
         .\mend.exe version
 
     - name: Mend CLI Scan
@@ -37,7 +37,7 @@ jobs:
         MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
         MEND_URL: https://saas.mend.io
       run: |
-        echo === Running Scan ===
+        echo '=== Running Scan ==='
         .\mend.exe dep -u --reachability-on
       continue-on-error: true
 
