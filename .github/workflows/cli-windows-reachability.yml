@@ -27,7 +27,7 @@ jobs:
         MEND_URL: https://saas.mend.io
       run: |
         echo === Downloading Mend CLI ==
-        curl https://downloads.mend.io/cli/windows_amd64/mend.exe -o C:\mend\cli\mend.exe
+        curl https://downloads.mend.io/cli/windows_amd64/mend.exe -o mend.exe
         echo === Mend CLI version: ===
         .\mend.exe version
 
