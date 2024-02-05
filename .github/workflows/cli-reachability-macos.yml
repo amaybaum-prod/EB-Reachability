@@ -1,0 +1,43 @@
+name: Mend Reachability CLI Scan (Linux)
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: mvn clean install -DskipTests=true
+
+# The mend dep scan should be called AFTER a package manager build step such as "mvn clean install -DskipTests=true" or "npm install --only=prod"
+    - name: Mend CLI Download
+      env:
+        MEND_EMAIL: ${{secrets.MEND_EMAIL}}
+        MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
+        MEND_URL: https://saas.mend.io
+      run: |
+        echo === Downloading Mend CLI ==
+        curl https://downloads.mend.io/cli/linux_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+        echo === Mend CLI version: ===
+        mend version
+
+    - name: Mend CLI Scan
+      env:
+        MEND_EMAIL: ${{secrets.MEND_EMAIL}}
+        MEND_USER_KEY: ${{secrets.MEND_USER_KEY}}
+        MEND_URL: https://saas.mend.io
+      run: |
+        echo === Running Scan ===
+        mend dep -u --reachability-on
+      continue-on-error: true
+
+    - name: Mend CLI Logs
+      run: cat ~/.mend/logs/sca/*.log
+
