@@ -14,7 +14,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Build with Maven
-      run: mvn clean install -DskipTests=true
+      run: |
+        mvn --version
+        mvn clean install -DskipTests=true
 
 # The mend dep scan should be called AFTER a package manager build step such as "mvn clean install -DskipTests=true" or "npm install --only=prod"
     - name: Mend CLI Download
