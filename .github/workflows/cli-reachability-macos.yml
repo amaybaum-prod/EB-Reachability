@@ -16,7 +16,8 @@ jobs:
     - name: Install Maven 3.8.8
       run: |
         brew update
-        brew install maven@3.8.8
+        brew search maven
+        brew install maven@3.8
     - name: Build with Maven
       run: |
         mvn --version
