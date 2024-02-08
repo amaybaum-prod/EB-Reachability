@@ -13,6 +13,10 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Install Maven 3.8.8
+      run: |
+        brew update
+        brew install maven@3.8.8
     - name: Build with Maven
       run: |
         mvn --version
