@@ -19,8 +19,8 @@ jobs:
         tar xzvf maven.3.8.8.tar.gz
     - name: Build with Maven
       run: |
-        ~/maven.3.8.8/bin/mvn --version
-        ~/maven.3.8.8/bin/mvn clean install -DskipTests=true
+        ~/apache-maven-3.8.8/bin/mvn --version
+        ~/apache-maven-3.8.8//bin/mvn clean install -DskipTests=true
 
 # The mend dep scan should be called AFTER a package manager build step such as "mvn clean install -DskipTests=true" or "npm install --only=prod"
     - name: Mend CLI Download
