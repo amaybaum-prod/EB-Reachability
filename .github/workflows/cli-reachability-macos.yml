@@ -15,13 +15,12 @@ jobs:
         distribution: 'adopt'
     - name: Install Maven 3.8.8
       run: |
-        brew update
-        brew search maven
-        brew install maven@3.8
+        curl https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz -o maven.3.8.8.tar.gz
+        tar xzvf maven.3.8.8.tar.gz
     - name: Build with Maven
       run: |
-        mvn --version
-        mvn clean install -DskipTests=true
+        ~/maven.3.8.8/bin/mvn --version
+        ~/maven.3.8.8/bin/mvn clean install -DskipTests=true
 
 # The mend dep scan should be called AFTER a package manager build step such as "mvn clean install -DskipTests=true" or "npm install --only=prod"
     - name: Mend CLI Download
