@@ -10,3 +10,4 @@ server-work/
 /.scannerwork
 /.idea/
 /easybuggy.iml
+.vscode/
