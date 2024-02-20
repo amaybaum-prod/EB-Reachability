@@ -41,7 +41,7 @@ jobs:
       continue-on-error: true
 
     - name: Mend CLI Logs List
-      run: ll ~/.mend/logs/sca
+      run: ls -l ~/.mend/logs/sca
       
     - name: Mend CLI Logs Content
       run: cat ~/.mend/logs/sca/*.log
