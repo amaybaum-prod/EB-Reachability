@@ -40,6 +40,9 @@ jobs:
         mend dep -u --reachability-on
       continue-on-error: true
 
-    - name: Mend CLI Logs
+    - name: Mend CLI Logs List
+      run: ll ~/.mend/logs/sca
+      
+    - name: Mend CLI Logs Content
       run: cat ~/.mend/logs/sca/*.log
 
