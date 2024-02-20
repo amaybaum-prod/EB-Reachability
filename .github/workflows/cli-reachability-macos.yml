@@ -34,7 +34,7 @@ jobs:
         echo === Downloading Mend CLI ==
         curl https://mend-unified-cli.s3.amazonaws.com/integration/wrapper/latest/darwin_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
         echo === Mend CLI version: ===
-        mend version
+        # mend version
 
     - name: Mend CLI Scan
       env:
