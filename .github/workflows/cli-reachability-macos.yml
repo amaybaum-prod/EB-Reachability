@@ -32,7 +32,8 @@ jobs:
         MEND_URL: https://saas.whitesourcesoftware.com
       run: |
         echo === Downloading Mend CLI ==
-        curl https://mend-unified-cli.s3.amazonaws.com/staging/wrapper/latest/darwin_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+        curl https://downloads.mend.io/cli/darwin_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+        # curl https://mend-unified-cli.s3.amazonaws.com/staging/wrapper/latest/darwin_amd64/mend -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
         echo === Mend CLI version: ===
         mend version
 
