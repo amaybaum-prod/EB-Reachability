@@ -38,7 +38,7 @@ jobs:
         MEND_URL: https://saas.whitesourcesoftware.com
       run: |
         echo '=== Running Scan ==='
-        .\mend.exe dep -u --reachability-on
+        .\mend.exe dep -u --reachability
       continue-on-error: true
 
     - name: Mend CLI Logs
